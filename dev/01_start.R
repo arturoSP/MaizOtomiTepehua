@@ -20,12 +20,13 @@
 ##
 golem::fill_desc(
   pkg_name = "MaizOtomiTepehua", # The Name of the package containing the App
-  pkg_title = "PKG_TITLE", # The Title of the package containing the App
-  pkg_description = "PKG_DESC.", # The Description of the package containing the App
-  author_first_name = "AUTHOR_FIRST", # Your First Name
-  author_last_name = "AUTHOR_LAST", # Your Last Name
-  author_email = "AUTHOR@MAIL.COM", # Your Email
-  repo_url = NULL, # The URL of the GitHub Repo (optional),
+  pkg_title = "MaizOtomiTepehua", # The Title of the package containing the App
+  pkg_description = "Análisis exploratorio de los datos recolectados en el
+  proyecto de Maíz Nativo de la región Otomí Tepehua en Hidalgo.", # The Description of the package containing the App
+  author_first_name = "arturo", # Your First Name
+  author_last_name = "sanchez-porras", # Your Last Name
+  author_email = "sp.arturo@gmail.com", # Your Email
+  repo_url = "https://github.com/arturoSP/MaizOtomiTepehua", # The URL of the GitHub Repo (optional),
   pkg_version = "0.0.0.9000" # The Version of the package containing the App
 )
 
@@ -37,7 +38,7 @@ golem::install_dev_deps()
 
 ## Create Common Files ----
 ## See ?usethis for more information
-usethis::use_mit_license("Golem User") # You can set another license here
+usethis::use_gpl3_license() # You can set another license here
 usethis::use_readme_rmd(open = FALSE)
 devtools::build_readme()
 # Note that `contact` is required since usethis version 2.1.5
