@@ -109,7 +109,8 @@ plotGrano <- function(){
       list(text = "Grosor de granos [cm]"),
       list(text = "Volumen de 100 granos [cm3]"),
       list(text = "Peso de 100 granos [g]")
-    ))
+    )) |>
+    echarts4r::e_tooltip(trigger = "item")
 
   pf <- list(p1, p2)
   return(pf)

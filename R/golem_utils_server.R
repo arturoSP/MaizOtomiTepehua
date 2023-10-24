@@ -14,22 +14,21 @@
 #   write.csv(bdMaizOT, file = "./data/bdMaiz.csv")
 # }
 
-bdMaizOT <- read.csv("./data/bdMaiz.csv")[,-1]
+bdMaizOT <- read.csv("./data/bdMaiz.csv")#[,-1]
 bdMaizOT <- type.convert(bdMaizOT, na.strings = "NA", as.is = FALSE)
 # str(bdMaizOT$TipoGrano)
 # summary(bdMaizOT$TipoGrano)
 
+# convierte en factores
 bdMaizOT$FormaMazorca <- factor(bdMaizOT$FormaMazorca,
                                 levels = c("cilíndrica", "cilíndrica,cónica-cilíndrica",
                                            "cónica-cilíndrica", "cónica"),
                                 ordered = T)
-bdMaizOT$FormaMazorcaNum <- as.numeric(bdMaizOT$FormaMazorca)
 
 bdMaizOT$DisposicionHileras <- factor(bdMaizOT$DisposicionHileras,
                                       levels = c("irregular", "en espiral,irregular",
                                                  "en espiral", "regular", "recta"),
                                       ordered = T)
-bdMaizOT$DisposicionHilerasNum <- as.numeric(bdMaizOT$DisposicionHileras)
 
 bdMaizOT$TipoGrano <- factor(bdMaizOT$TipoGrano,
                              levels = c("harinoso (A)", "semi-harinoso", "dentado (C)",
@@ -38,11 +37,19 @@ bdMaizOT$TipoGrano <- factor(bdMaizOT$TipoGrano,
                                         "reventador (G),semi-cristalino (E)", "reventador (G)",
                                         "ceroso"),
                              ordered = T)
+
+# nuevas columnas
+bdMaizOT$FormaMazorcaNum <- as.numeric(bdMaizOT$FormaMazorca)
+
+bdMaizOT$DisposicionHilerasNum <- as.numeric(bdMaizOT$DisposicionHileras)
+
 bdMaizOT$TipoGranoNum <- as.numeric(bdMaizOT$TipoGrano)
 
 bdMaizOT$multicolorGrano <- ifelse(stringr::str_detect(bdMaizOT$ColorGrano, ","),1,0)
 
 bdMaizOT$multicolorOlote <- ifelse(stringr::str_detect(bdMaizOT$ColorOlote, ","),1,0)
+
+# arreglo final
 
 bdMaizOT <- bdMaizOT[,c(1:18, 24:28, 19:23)]
 

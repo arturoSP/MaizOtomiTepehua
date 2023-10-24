@@ -40,7 +40,8 @@ plotMazorca <- function(){
      list(text = "Longitud de la mazorca [cm]"),
      list(text = "Diámetro de la mazorca [cm]"),
      list(text = "Peso de la mazorca [g]")
-   ))
+   )) |>
+   echarts4r::e_tooltip(trigger = "item")
 
  return(p1)
 }

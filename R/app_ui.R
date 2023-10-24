@@ -86,8 +86,8 @@ app_ui <- function(request) {
             tabPanel("Mazorcas",
                      withSpinner(echarts4r::echarts4rOutput("grafMazorcas"),
                                  type = 1)),
-            tabPanel("Similitud en variedaes por localidad",
-                     withSpinner(plotly::plotlyOutput("grafMDS"), #echarts4r::echarts4rOutput("grafMDS"),
+            tabPanel("Similitud en variedades por localidad",
+                     withSpinner(plotly::plotlyOutput("grafMDS"),
                                  type = 1))
             )
         )

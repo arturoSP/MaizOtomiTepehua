@@ -41,12 +41,23 @@ plotMDS <- function(){
   # determinación de clusters
   clust <- stats::kmeans(MDS_OT_points[,1:2], centers = 3)
   pca_MDS <- stats::princomp(MDS_OT_points[,1:2])
-  MDS_cluster <- data.frame(pca_MDS$scores, Grupo = as.factor(clust$cluster), Localidad = as.factor(MDS_OT_points$Localidad))
+  MDS_cluster <- data.frame(pca_MDS$scores,
+                            Grupo = as.factor(clust$cluster),
+                            Localidad = as.factor(MDS_OT_points$Localidad),
+                            Municipio = as.factor(MDS_OT_points$Municipio))
 
   p1 <- ggplot(MDS_cluster, aes(x = Comp.1, y = Comp.2))+
     stat_ellipse(aes(fill = Grupo), type = "t", geom = "polygon", alpha = 0.3, show.legend = F)+
-    geom_point(aes(shape = Localidad, fill = Localidad), size = 4, color = "light grey")+
+    geom_point(aes(shape = Municipio, fill = Localidad, color = Grupo), size = 4)+
     scale_shape_manual(values = c(21, 22, 23, 24, 0, 1, 2))+
+    scale_fill_manual(values = c("#b2182b", "#de77ae", "#7fbc41", "#4393c3",
+                                 "#8dd3c7", "#aaffb3", "#bebada",
+                                 "#fb8072", "#80b1d3", "#fdb462",
+                                 "#a6cee3", "#1f78b4", "#b2df8a",
+                                 "#33a02c", "#fb9a99", "#e31a1c",
+                                 "#fdbf6f", "#ff7f00", "#cab2d6",
+                                 "#6a3d9a", "#ffff99", "#b15928"))+
+    scale_color_manual(values = c("#b2182b", "#de77ae", "#7fbc41", "#4393c3"))+
     theme_bw()+
     theme(panel.grid = element_blank(),
           axis.title = element_blank(),
@@ -59,7 +70,7 @@ plotMDS <- function(){
           legend.key = element_rect(fill = "#fffce2"))+
     ggtitle(paste0("MDS no métrico, stress = ", MDS_OT_stress))
 
-  p1 <- plotly::ggplotly(p1, tooltip = c("shape"))
+  p1 <- plotly::ggplotly(p1, tooltip = c("fill"))
 
   # # gráfico de análisis
   # p1 <- MDS_cluster |>
