@@ -1,6 +1,7 @@
 #' grafMazorcas
 #'
-#' @description A fct function
+#' @description Prepares data and plots for qualitative and quantitative
+#' characteristics of the corn cobs.
 #'
 #' @return An interactive plot.
 #'

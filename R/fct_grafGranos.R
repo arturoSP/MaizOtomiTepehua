@@ -1,6 +1,7 @@
 #' grafGranos1
 #'
-#' @description A fct function
+#' @description Prepares data and plots for qualitative and quantitative
+#' characteristics of the corn grains.
 #'
 #' @return An interactive plot.
 #'

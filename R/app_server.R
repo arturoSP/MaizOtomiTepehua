@@ -3,7 +3,9 @@
 #' @param input,output,session Internal parameters for {shiny}.
 #'     DO NOT REMOVE.
 #' @import shiny
-#' @import echarts4r
+#' @importFrom plotly renderPlotly
+#' @importFrom echarts4r renderEcharts4r
+#' @importFrom leaflet renderLeaflet
 #' @noRd
 #'
 
@@ -16,4 +18,6 @@ app_server <- function(input, output, session) {
   output$grafGranos2 <- echarts4r::renderEcharts4r(plotGrano()[[2]])
 
   output$grafMazorcas <- echarts4r::renderEcharts4r(plotMazorca())
+
+  output$grafMapa <- leaflet::renderLeaflet(plotMap())
 }

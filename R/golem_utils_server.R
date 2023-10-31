@@ -1,7 +1,6 @@
-#' Read data from google drive
+#' Read data
 #'
 #' @importFrom stringr str_detect
-#' @importFrom googlesheets4 read_sheet
 #' @noRd
 #'
 
@@ -51,7 +50,7 @@ bdMaizOT$multicolorOlote <- ifelse(stringr::str_detect(bdMaizOT$ColorOlote, ",")
 
 # arreglo final
 
-bdMaizOT <- bdMaizOT[,c(1:18, 24:28, 19:23)]
-
+#bdMaizOT <- bdMaizOT[,c(1:18, 24:28, 19:23)]
+bdMaizOT <- bdMaizOT[,c(1:18, 27:31, 19:23, 25,26)]
 
 

@@ -95,6 +95,17 @@ app_ui <- function(request) {
       fluidRow(
         div(
           class = "container p-5",
+          style = "background-color: #756bb1;",
+          # mapa
+          h2("De dónde vienen nuestros maíces",
+             class = "header dark shadow-dark"),
+          withSpinner(leaflet::leafletOutput("grafMapa"),
+                      type = 1)
+        )
+      ),
+      fluidRow(
+        div(
+          class = "container p-5",
           style = "background-color: #FFFAC8;",
           #ending
           p("Este proyecto fue desarrollado como parte de las actividades de la",

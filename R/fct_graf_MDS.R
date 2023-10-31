@@ -1,6 +1,7 @@
 #' graf_MDS
 #'
-#' @description A fct function
+#' @description Prepares data to show an interactive non-metric MDS plot for the
+#' different collected samples.
 #'
 #' @return An interactive plot.
 #'
@@ -50,14 +51,14 @@ plotMDS <- function(){
     stat_ellipse(aes(fill = Grupo), type = "t", geom = "polygon", alpha = 0.3, show.legend = F)+
     geom_point(aes(shape = Municipio, fill = Localidad, color = Grupo), size = 4)+
     scale_shape_manual(values = c(21, 22, 23, 24, 0, 1, 2))+
-    scale_fill_manual(values = c("#b2182b", "#de77ae", "#7fbc41", "#4393c3",
+    scale_fill_manual(values = c("#b2182b", "#4393c3", "#7fbc41", "#de77ae",
                                  "#8dd3c7", "#aaffb3", "#bebada",
                                  "#fb8072", "#80b1d3", "#fdb462",
                                  "#a6cee3", "#1f78b4", "#b2df8a",
                                  "#33a02c", "#fb9a99", "#e31a1c",
                                  "#fdbf6f", "#ff7f00", "#cab2d6",
                                  "#6a3d9a", "#ffff99", "#b15928"))+
-    scale_color_manual(values = c("#b2182b", "#de77ae", "#7fbc41", "#4393c3"))+
+    scale_color_manual(values = c("#b2182b", "#4393c3", "#7fbc41", "#de77ae"))+
     theme_bw()+
     theme(panel.grid = element_blank(),
           axis.title = element_blank(),
