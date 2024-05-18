@@ -9,6 +9,7 @@
 #' @importFrom dplyr filter
 #' @importFrom dplyr mutate
 #' @importFrom dplyr group_by
+#' @importFrom dplyr arrange
 #' @importFrom tidyr pivot_longer
 #' @import echarts4r
 #'
@@ -26,11 +27,12 @@ plotMazorca <- function(){
                                        "DiametroMazorca", "PesoMazorca"),
                             labels = c("Hileras por\nmazorca", "Longitud [cm]",
                                        "Diámetro [cm]", "Peso [g]"),
-                            ordered = T))
+                            ordered = T)) |>
+    dplyr::arrange(Municipio)
 
  p1 <- mazorcaCuanti |>
     dplyr::group_by(Metrica) |>
-    echarts4r::e_chart(Localidad, timeline = TRUE) |>
+    echarts4r::e_chart(Municipio, timeline = TRUE) |>
     echarts4r::e_color(background = "#fffce2") |>
     echarts4r::e_scatter(Valor, colorBy = 'data',
                          symbol_size = 20,

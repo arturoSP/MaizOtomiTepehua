@@ -12,6 +12,7 @@
 #' @importFrom dplyr group_by
 #' @importFrom dplyr summarise
 #' @importFrom dplyr inner_join
+#' @importFrom dplyr arrange
 #' @importFrom tidyr pivot_longer
 #' @importFrom stringr str_detect
 #' @importFrom stringr str_to_sentence
@@ -48,23 +49,23 @@ plotGrano <- function(){
   granoColor <- granoColor[,-4]
 
   granoColor <- granoColor |>
-    dplyr::group_by(Localidad) |>
+    dplyr::group_by(Municipio) |>
     dplyr::summarise(across(.cols = c(amarillo:rosa), .fns = sum)) |>
     tidyr::pivot_longer(cols = c(amarillo:rosa), names_to = "Color", values_to = "Valor") |>
     dplyr::mutate(Color = stringr::str_to_sentence(Color))
 
   granoColorT <- granoColor |>
-    dplyr::group_by(Localidad) |>
+    dplyr::group_by(Municipio) |>
     dplyr::summarise(Total = sum(Valor))
 
   granoColor <- granoColor |>
-    dplyr::inner_join(granoColorT, by = "Localidad") |>
-    dplyr::transmute(Localidad,
+    dplyr::inner_join(granoColorT, by = "Municipio") |>
+    dplyr::transmute(Municipio,
                      Color,
                      Valor = round(Valor / Total, 2))
 
   p1 <- granoColor |>
-    dplyr::group_by(Localidad) |>
+    dplyr::group_by(Municipio) |>
     echarts4r::e_chart(Color, timeline = TRUE) |>
     echarts4r::e_color(background = "#fffce2") |>
     echarts4r::e_pie(Valor,
@@ -79,7 +80,12 @@ plotGrano <- function(){
                               "#800080", "#FFA500", "#000000", "#FF0000",
                               "#FF4500", "#8B0000", "#FFC0CB"]}') |>
     echarts4r::e_toolbox_feature('saveAsImage') |>
-    echarts4r::e_title("Color de los granos")
+    echarts4r::e_timeline_serie(title = list(
+      list(text = "Acaxochitlán"),
+      list(text = "Huehuetla"),
+      list(text = "San Bartolo Tutotepec"),
+      list(text = "Tenango de Doria")
+    ))
 
   granoCuanti <- dataOT[,-c(11:14)] |>
     tidyr::pivot_longer(cols = c(4:10), names_to = "Metrica", values_to = "Valor") |>
@@ -92,11 +98,17 @@ plotGrano <- function(){
                                             "Longitud", "Anchura",
                                             "Grosor", "Volumen 100\ngranos",
                                             "Peso 100\ngranos"),
-                                 ordered = T))
+                                 ordered = T),
+                  Municipio = factor(Municipio,
+                                     levels = c("Acaxochitlán", "Huehuetla",
+                                                "San Bartolo Tutotepec", "Tenango de Doria"),
+                                     ordered = T)
+                  ) |>
+    dplyr::arrange(Municipio)
 
   p2 <- granoCuanti |>
     dplyr::group_by(Metrica) |>
-    echarts4r::e_chart(Localidad, timeline = TRUE) |>
+    echarts4r::e_chart(Municipio, timeline = TRUE) |>
     echarts4r::e_color(background = "#fffce2") |>
     echarts4r::e_scatter(Valor, colorBy = 'data',
                          symbol_size = 20,

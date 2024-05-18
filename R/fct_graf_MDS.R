@@ -48,17 +48,12 @@ plotMDS <- function(){
                             Municipio = as.factor(MDS_OT_points$Municipio))
 
   p1 <- ggplot(MDS_cluster, aes(x = Comp.1, y = Comp.2))+
-    stat_ellipse(aes(fill = Grupo), type = "t", geom = "polygon", alpha = 0.3, show.legend = F)+
-    geom_point(aes(shape = Municipio, fill = Localidad, color = Grupo), size = 4)+
-    scale_shape_manual(values = c(21, 22, 23, 24, 0, 1, 2))+
-    scale_fill_manual(values = c("#b2182b", "#4393c3", "#7fbc41", "#de77ae",
-                                 "#8dd3c7", "#aaffb3", "#bebada",
-                                 "#fb8072", "#80b1d3", "#fdb462",
-                                 "#a6cee3", "#1f78b4", "#b2df8a",
-                                 "#33a02c", "#fb9a99", "#e31a1c",
-                                 "#fdbf6f", "#ff7f00", "#cab2d6",
-                                 "#6a3d9a", "#ffff99", "#b15928"))+
-    scale_color_manual(values = c("#b2182b", "#4393c3", "#7fbc41", "#de77ae"))+
+    stat_ellipse(aes(color = Grupo), fill = "#fffce2", type = "t", geom = "polygon", alpha = 0.3, show.legend = F)+
+    geom_point(aes(shape = Municipio, fill = Municipio, color = Grupo), size = 4)+
+    scale_shape_manual(values = c(15, 16, 17, 18))+
+    scale_fill_manual(values = c("#1f78b4", "#fb8072", "#7fbc41",
+                                 "#aaffb3"))+
+    scale_color_manual(values = c("#b2182b", "#4393c3", "#de77ae"))+
     theme_bw()+
     theme(panel.grid = element_blank(),
           axis.title = element_blank(),
@@ -72,26 +67,6 @@ plotMDS <- function(){
     ggtitle(paste0("MDS no métrico, stress = ", MDS_OT_stress))
 
   p1 <- plotly::ggplotly(p1, tooltip = c("fill"))
-
-  # # gráfico de análisis
-  # p1 <- MDS_cluster |>
-  #   #dplyr::mutate(Cluster = clust) |>
-  #   dplyr::group_by(Localidad) |>
-  #   echarts4r::e_chart(MDS1) |>
-  #   echarts4r::e_color(background = "#fffce2") |>
-  #   echarts4r::e_scatter(MDS2,
-  #                        symbol_size = 10,
-  #                        symbol = "circle",
-  #                        rm_x = TRUE,
-  #                        rm_y = TRUE) |>
-  #   echarts4r::e_hide_grid_lines() |>
-  #   echarts4r::e_circle_g(right = 0, top = 0, radius = 0.02) |>
-  #   echarts4r::e_rm_axis(axis = c("MDS1", "MDS2")) |>
-  #   echarts4r::e_toolbox_feature("saveAsImage") |>
-  #   echarts4r::e_tooltip(trigger = "item") |>
-  #   echarts4r::e_legend(orient = "vertical", right = '5', top = '10%') |>
-  #   echarts4r::e_title("Similitud entre muestras recolectadas", paste0("MDS no métrico, stress = ", MDS_OT_stress))
-  # p1
 
   return(p1)
 

@@ -4,19 +4,9 @@
 #' @noRd
 #'
 
-# preparación de base de datos ----
-
-# lectura de datos desde google sheets
-# {
-#   bdMaizOT <- googlesheets4::read_sheet("https://docs.google.com/spreadsheets/d/1XwkyOf2cVFqZ1vU4WZ4yeekDlY7PhosdGpeikGL8Ydg/edit?usp=sharing",
-#                                         na = "", sheet = 1)
-#   write.csv(bdMaizOT, file = "./data/bdMaiz.csv")
-# }
-
+# Datos de maíces ----
 bdMaizOT <- read.csv("./data/bdMaiz.csv")#[,-1]
 bdMaizOT <- type.convert(bdMaizOT, na.strings = "NA", as.is = FALSE)
-# str(bdMaizOT$TipoGrano)
-# summary(bdMaizOT$TipoGrano)
 
 # convierte en factores
 bdMaizOT$FormaMazorca <- factor(bdMaizOT$FormaMazorca,
@@ -53,4 +43,14 @@ bdMaizOT$multicolorOlote <- ifelse(stringr::str_detect(bdMaizOT$ColorOlote, ",")
 #bdMaizOT <- bdMaizOT[,c(1:18, 24:28, 19:23)]
 bdMaizOT <- bdMaizOT[,c(1:18, 27:31, 19:23, 25,26)]
 
+# Datos de productores ----
+bdProductoresOT <- read.csv("./data/bdProductores.csv")
+colnames(bdProductoresOT) <- c("LenguaIndigena",   "Escolaridad",
+                               "Familia",          "TiempoCompleto",
+                               "PropiedadTerreno", "FechaPreparacion",
+                               "FechaSiembra",     "FechaCosecha",
+                               "Preparacion",      "Plagas",
+                               "Milpa",            "Usos",
+                               "Alimento",         "Problemas",
+                               "SemillasHibridas")
 
